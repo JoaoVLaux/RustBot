@@ -1,0 +1,18 @@
+[
+    {
+        "command": "```/vc_help```",
+        "description": "Mostra todos os comandos do canal"
+    },
+    {
+        "command": "```/vc_rename {new_channel_name}```",
+        "description": "Renomeia o canal"
+    },
+    {
+        "command": "```/vc_limit {new_limit}```",
+        "description": "Define o número máximo de pessoas."
+    },
+    {
+        "command": "```/vc_stay```",
+        "description": "Mude o status do canal, não pode ser excluído após sair."
+    }
+]

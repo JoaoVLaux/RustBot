@@ -1,0 +1,72 @@
+{
+  "Autorun": {
+    "description": "Pressione Y e você corre sem precisar pressionar W",
+    "bind": "Y",
+    "action": "forward;sprint"
+  },
+  "Auto Bandage Craft": {
+    "description": "Pressione C e você faz curativos durante uma luta",
+    "bind": "C",
+    "action": "craft.add -2072273936 1"
+  },
+  "Combat log": {
+    "description": "Abre o log de combate no Console",
+    "bind": "F1",
+    "action": "consoletoggle;combatlog"
+  },
+  "Combat log filter: only your dmg": {
+    "description": "Mostra apenas o dano que você causa",
+    "bind": "F2",
+    "action": "consoletoggle;combatlog_outgoing"
+  },
+  "Suicide": {
+    "description": "Atalho para o comando de suicídio no Console (Pressione END para autoeliminação)",
+    "bind": "End",
+    "action": "kill"
+  },
+  "AutoMine bind": {
+    "description": "Usa automaticamente a ação de ataque junto com agachar",
+    "bind": "M",
+    "action": "attack;duck"
+  },
+  "Automatically heal": {
+    "description": "Usa automaticamente curativos ou seringas no slot 6",
+    "bind": "T",
+    "action": "+slot6;+attack"
+  },
+  "Fast Switch to your Slot 4": {
+    "description": "Melhor controle sobre a barra de atalhos",
+    "bind": "MouseWheelUp",
+    "action": "+slot4"
+  },
+  "Fast Switch to your Slot 5": {
+    "description": "Melhor controle sobre a barra de atalhos",
+    "bind": "MouseWheelDown",
+    "action": "+slot5"
+  },
+  "Show Pop of the Server": {
+    "description": "Não funciona em todos os servidores, apenas em servidores comunitários",
+    "bind": "F10",
+    "action": "teamsay \"!pop\""
+  },
+  "Sound to minimum": {
+    "description": "Reduz o som do jogo ao mínimo (para dirigir barco, reciclar, Minicóptero)",
+    "bind": "M",
+    "action": "audio.master 0.1"
+  },
+  "Sets Gamesounds back to normal": {
+    "description": "Restaura o som do jogo ao normal",
+    "bind": "N",
+    "action": "audio.master 1"
+  },
+  "Memory leak fix": {
+    "description": "Pressione K para limpar a memória e corrigir alguns problemas de FPS",
+    "bind": "K",
+    "action": "gc.collect"
+  },
+  "Noclip for build server": {
+    "description": "Pressione H para voar (somente com direitos de admin)",
+    "bind": "H",
+    "action": "noclip"
+  }
+}

@@ -1,0 +1,30 @@
+[
+    {
+        "command": "```/change_server {server_id}```",
+        "description": "Alterar servidor Rust. Use Battlemetrics.com para determinar o ID do servidor e mude com /change_server."
+    }, 
+    {
+        "command": "```/all_players```",
+        "description": "Lista de todos os jogadores do servidor Rust que estão online no momento com battelmatrics id"
+    }, 
+    {
+        "command": "```/add_player {player_id} {Anotação}```",
+        "description": "Adicione um novo jogador. Use Battlemetrics.com para descobrir o ID do jogador e digite /change_server. Adicione uma nota ao player. Se necessário, crie um novo time ou atribua-a em time existente através do menu."
+    },
+    {
+        "command": "```/del_player```",
+        "description": "Remover jogador. Selecione um jogador da lista para removê-lo."
+    },
+    {
+        "command": "```/del_team```",
+        "description": "Remove time. Selecione o time na lista para removê-lo."
+    },
+    {
+        "command": "```/clear_watchlist```",
+        "description": "Limpar lista de observação. A atenção remove todos os jogadores e todos os times."
+    },
+    {
+        "command": "```/team_check {player_steam_url}```",
+        "description": "Verificação de time. Verifica um jogador em busca de possíveis membros do time no servidor usando o ID Steam."
+    }
+]

@@ -1,0 +1,184 @@
+"""Full Doku on: https://github.com/NapoII/"
+-----------------------------------------------
+add doku
+------------------------------------------------
+"""
+
+#### import
+
+import os
+import sys
+
+import time
+import discord
+from discord.ext import commands, tasks
+
+from util.__funktion__ import *
+from util.__Mydiscord_funktions__ import *
+from util.__my_imge_path__ import *
+img_url = my_image_url()
+#### pre Var
+py_name = os.path.basename(__file__)
+
+file_path = os.path.normpath(os.path.dirname(sys.argv[0]))
+config_dir = file_path + os.path.sep + "config"+ os.path.sep +"config.ini"
+
+################################################################################################################################
+"""
+Loading Configuration:
+Loads configuration settings from token.ini and config.ini files.
+- Discord_token: Token for the Discord bot.
+- Application_ID: Discord application ID.
+- guild_id: ID of the Discord server.
+- praefix: Command prefix for the bot.
+- activity_text: Text for the bot's activity status.
+
+"""
+
+# Load Config_dir
+token_config_dir = os.path.normpath(os.path.join(file_path, "config", "token.ini"))
+
+
+# Client
+Discord_token = read_config(token_config_dir, "discord", "token")
+Application_ID = read_config(token_config_dir, "discord", "application_id")
+
+
+guild_id = read_config(config_dir, "client", "guild_id", "int")
+guild = discord.Object(id=guild_id)
+praefix = read_config(config_dir, "client", "praefix")
+activity_text = read_config(config_dir, "client", "activity")
+activity = Discord_Activity(activity_text)
+
+# channel
+bot_cmd_channel_id = read_config(config_dir, "channels", "bot_cmd_channel_id", "int")
+
+git_last_commit, git_last_date, git_branch = get_last_commit_info()
+git_link = read_config(config_dir, "git", "git_link", "str")
+
+
+
+################################################################################################################################
+# main
+
+class MyBot(commands.Bot):
+    def __init__(self):
+        super().__init__(
+            command_prefix=praefix,
+            intents=discord.Intents.all(),
+            application_id=Application_ID,
+            activity=discord.Game(activity_text)
+        )
+
+        # List of initial extensions to load
+        # add more cogs here
+
+        self.initial_extensions = [
+            "discord_cogs.admin.pre_setup",
+            "discord_cogs.rust.setup.rust_pre_setup",
+            "discord_cogs.admin.say",
+            "discord_cogs.rust.channel_hopper.channel_hopper",
+            "discord_cogs.rust.server_stats.server_stats",
+            "discord_cogs.rust.team_cheack.team_cheack",
+            "discord_cogs.rust.player_observation.player_observation",
+            "discord_cogs.rust.rust_info.rust_info",
+            "discord_cogs.admin.removetag",
+            
+        
+        ]
+
+    async def setup_hook(self):
+        """Load initial extensions during bot setup."""
+        for ext in self.initial_extensions:
+            await self.load_extension(ext)
+
+        await bot.tree.sync(guild=discord.Object(guild_id))
+
+    async def on_ready(self):
+        """Event triggered when the bot is ready."""
+        guild = self.get_guild(guild_id)  # Access guild from the class attribute
+        if not guild:
+            print("O bot não está na guilda especificada.")
+            return
+
+        print(f'\nLogado como {self.user} (ID: {self.user.id})')
+
+        # Retrieve bot_cmd_channel_id without type conversion
+        bot_cmd_channel_id = read_config(config_dir, "channels", "bot_cmd_channel_id", "int")
+
+        # Check if bot_cmd_channel_id is valid
+        if bot_cmd_channel_id is not None:
+            bot_cmd_channel = guild.get_channel(bot_cmd_channel_id)
+
+            # Check if bot_cmd_channel is a valid TextChannel
+            if bot_cmd_channel is not None and isinstance(bot_cmd_channel, discord.TextChannel):
+                print(f'\nBot connectado em [{guild.name}] id: [{guild.id}]')
+
+            """Send an introductory message to the specified channel."""
+
+        # Create and send the bot information embed
+        bot_start_embeds = []    
+
+
+        git_embed = discord.Embed(title="Git Status", color=0xff80ff,)
+        git_embed.set_author(name="criado by Patoelho", url="https://github.com/JoaoVLaux")
+        git_embed.set_thumbnail(url=img_url.platfrom.discord_bot)
+        git_embed.add_field(name="github", value=git_link, inline=False)
+        git_embed.add_field(name="Git Branch", value=git_branch, inline=True)
+        git_embed.add_field(name="Git Commit", value=git_last_commit, inline=True)
+        git_embed.add_field(name="Git Date", value=git_last_date, inline=True)
+        bot_start_embeds.append(git_embed)
+
+
+        time_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print("\n")
+        print(f"{time_str} --> {git_link}")
+        print(f"Git Branch --> {git_branch}")
+        print(f"Git Git Commit --> {git_last_commit}")
+        print(f"Git Dateit --> {git_last_date}")
+
+
+        # Create and send the bot status embed
+        start_time = discord_time_convert(time.time())
+        start_embed = discord.Embed(title="📶 Bot Online e pronto para rodar... 📶", color=0xff8080)
+        start_embed.add_field(name="Client Name", value=self.user.name, inline=True)
+        start_embed.add_field(name="Online: ", value=f"{start_time}", inline=True)
+        bot_start_embeds.append(start_embed)
+
+        try:
+            await bot_cmd_channel.send(embeds=bot_start_embeds)
+        except:
+            print ("Primeiro START do Bot !!!")
+            pass
+
+        time_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(f"{time_str} --> 📶 Bot Online e pronto para rodar... 📶")
+        print("\n")
+
+
+# Instantiate and run the bot
+bot = MyBot()
+bot.run(Discord_token)
+
+
+################################################################################################################################
+#   Link collection for useful are for discord py
+#
+#   Discord PY Doku : https://discordpy.readthedocs.io/en/stable/
+#   Embed generator : https://embed.dan.onl/
+
+
+
+"""
+Discord Embed Limits
+
+If you plan on using embed responses for your bot you should know the limits of the embeds on Discord or you will get Invalid Form Body errors:
+
+    Embed title is limited to 256 characters
+    Embed description is limited to 4096 characters
+    An embed can contain a maximum of 25 fields
+    A field name/title is limited to 256 character and the value of the field is limited to 1024 characters
+    Embed footer is limited to 2048 characters
+    Embed author name is limited to 256 characters
+    The total of characters allowed in an embed is 6000
+"""

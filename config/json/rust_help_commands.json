@@ -1,0 +1,43 @@
+[
+    {
+        "command": "```!rust help```",
+        "description": "Todos comandos"
+    },
+    {
+        "command": "```!rust cctv```",
+        "description": "Lista CCTV"
+    },
+    {
+        "command": "```!rust pager```",
+        "description": "Lista de pager"
+    },
+    {
+        "command": "```!rust cost```",
+        "description": "Preços importantes"
+    },
+    {
+        "command": "```!rust fert {Qnt fertilizante}```",
+        "description": "Quanta Sucata em x Fertilizante"
+    },
+    {
+        "command": "```!rust diesel {Qnt Diesel}```",
+        "description": "Excavator / Mineradora - Calculatora"
+    },
+    {
+        "command": "```!rust sulfur {quantidade de sulfur}```",
+        "description": "Quanto de boom em x suflur"
+    },
+    {
+        "command": "```!rust raid```",
+        "description": "Raid costs lista"
+    },
+    {
+        "command": "```!rust bind```",
+        "description": "Bind's"
+    },
+    {
+        "command": "```!rust elec```",
+        "description": "Eletrica"
+    }
+    
+]
